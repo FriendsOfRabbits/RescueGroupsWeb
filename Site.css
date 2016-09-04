@@ -174,7 +174,6 @@ visibility: hidden;
     left:0;
     top: 0;
     height: 100%;
-    filter: blur(20px);
     padding: 20px;
     text-overflow: ellipsis;
     

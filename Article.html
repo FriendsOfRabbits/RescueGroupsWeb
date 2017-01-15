@@ -1,0 +1,28 @@
+<div style="max-width:1000px; margin: 0 auto">
+<h2 id="articleTitle">&nbsp;</h2>
+
+<div id="articleContent">&nbsp;</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var postId = window.location.hash.substring(1);
+        // get post
+console.log('https://www.googleapis.com/blogger/v3/blogs/5808216159225430073/posts/'+postId+'?key=AIzaSyAOuNtBiIZNHkcgke_jSCqTjz-vZy9j5Y8');
+        $.ajax({
+                url: 'https://www.googleapis.com/blogger/v3/blogs/5808216159225430073/posts/'+postId+'?key=AIzaSyAOuNtBiIZNHkcgke_jSCqTjz-vZy9j5Y8',
+                datatype: 'json',
+                method: 'GET',
+                success : function (response) {
+                    $('#articleTitle').html(response.title);
+                    $('#articleContent').html(response.content);
+                },
+                error: function(xhr,status,error){
+                    console.log(error);
+                    $('#articleTitle').html('Opps!'); 
+                    $('#articleContent').html('We had a problem retrieving this article.');
+                }
+            });
+    });
+
+</script>

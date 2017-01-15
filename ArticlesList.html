@@ -1,0 +1,36 @@
+<div style="max-width:1000px; margin: 0 auto">
+<h2>Friends of Rabbit Knowledgebase Articles</h2>
+
+<div id="articleContent">&nbsp;</div>
+</div>
+<script type="text/javascript">
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	$(document).ready(function() {
+		// get post
+		$.ajax({
+                url: 'https://www.googleapis.com/blogger/v3/blogs/5808216159225430073/posts?key=AIzaSyAOuNtBiIZNHkcgke_jSCqTjz-vZy9j5Y8&maxResults=500&fetchBodies=false',
+                datatype: 'json',
+                method: 'GET',
+                success : function (response) {
+                	var articles = response.items;
+                	var html = "<ul>";
+                	for(var i=0; i < articles.length; i++ )
+                	{
+                		var article = articles[i];
+                		var published = new Date(article.published);
+                		html += '<li>'
+                				+'<a href="/article#'+ article.id +'">'+article.title+'</a>'
+                				+'</li>';
+
+                	}
+                	html += '</ul>';
+                	$('#articleContent').html(html);
+                },
+                error: function(xhr,status,error){
+                	console.log(error);
+                	$('#articleContent').html('<div>Visit our knowledgebase at <a href="http://friendsofrabbitsdc.blogspot.com" target="_blank">http://friendsofrabbitsdc.blogspot.com</a></div>');
+                }
+            });
+	});
+
+</script>
